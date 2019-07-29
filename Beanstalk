@@ -1,0 +1,6 @@
+Elastic Beanstalk 
+
+eb init
+eb create 
+eb console
+eb log
