@@ -1,0 +1,20 @@
+Jenkins
+
+TravisCI
+High Level Work Flow:
+> Merge Pull Request on master(on Github)
+> Travis Builds your projects automatically/run tests
+> Travis Uploads your zipped project up to AWS S3
+> Travis Then Tells AWS Code Deploy to deploy to your AWS EC2 Instance
+
+
+Secretkey encryption
+$ sudo apt-get install travis
+$ cd gitrepo
+$ travis encrypt secretkey
+
+
+CircleCI
+
+
+EC2 Container Services (ECS)
