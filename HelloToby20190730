@@ -1,0 +1,65 @@
+HelloToby
+
+Cronjob
+
+* * * * * command
+minutes (0-59)
+hours (0-23)
+day (0-31)
+month (0-12)
+weekday (0-6)
+
+#8am and 8pm
+* 8,20 * * *
+
+every two hours
+0 */2 * * * 
+
+send email after command
+MAILTO="kejyun@gmail.com"
+
+stdout > /dev/null stderr > stdout
+> /dev/null 2>&1
+
+
+Mysql replication 
+Master Master haproxy
+Master Slave
+Binlog Relay
+
+AWS blue green deployment
+
+https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-groups-create-in-place.html
+
+
+docker nginx
+
+https://blog.florianlopes.io/host-multiple-websites-on-single-host-docker/
+
+Routing requests using VIRTUAL_HOST environment variable:
+Nginx-proxy will route requests to containers according to the VIRTUAL_HOST environment variable of each container. This means that if you want a container to be served with a specific domain or subdomain, you have to launch this one with the desired VIRTUAL_HOST environment variable.
+
+Here is an example:
+
+# Launch WordPress (db part omitted for clarity)
+docker run -d --name blog --expose 80 -e VIRTUAL_HOST=blog.domain.com wordpress  
+# Launch Jenkins
+docker run -d --name jenkinsci --expose 8080 -e VIRTUAL_HOST=jenkins.domain.com -e VIRTUAL_PORT=8080 jenkins  
+
+Again, here is the equivalent configuration for the Jenkins instance, using docker-compose syntax:
+
+jenkins:  
+  image: jenkins
+  expose:
+    - 8080
+    - 50000
+  environment:
+    - "VIRTUAL_HOST=jenkins.domain.com"
+    - "VIRTUAL_PORT=8080"
+  volumes:
+    - "/your/home:/var/jenkins_home"
+    
+    
+
+   
+   
