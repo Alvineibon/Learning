@@ -1,0 +1,21 @@
+Nginx Vs Apache
+Nginx
+Openresty??!!
+concurrent connection 4 times than apache
+speed faster
+Reverse proxy (Load Balancing)
+unix socket/tcp connection
+FastCGI for static content
+Php-fpm
+
+
+
+Apache
+support .htacess and 60 modules
+worker,prefork and event
+mod_php --> must use pre-fork
+
+AWS Az and Region
+Region is the larger area
+Az datacenter
+
