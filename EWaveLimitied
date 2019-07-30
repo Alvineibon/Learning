@@ -19,3 +19,30 @@ AWS Az and Region
 Region is the larger area
 Az datacenter
 
+AWS NLB (Network Load Balancer)  ALB (Application Load Balancer) CLB (Classic Load Balancer)
+1.  Listener - incoming port/protocol to EC2 port/protocol
+2.  Health Check - see whether ec2 is alive
+
+ALB http
+NLB tcp (ssl)
+CLB TCP and http (ssl)
+
+https://jackiechen.org/2018/01/10/aws-elb-clb-vs-alb-vs-nlb/
+
+
+AWS API Gateway
+
+https://aws.amazon.com/api-gateway/
+
+
+Varnish vs nginx
+
+https://www.keycdn.com/support/varnish-vs-nginx
+
+ACM (AWS Certicification manager)
+
+
+Git command
+git add .
+git commit -m "Message"
+git push origin master
