@@ -1,5 +1,24 @@
 HelloToby
 
+2019-08-01 After talking with Jason Cheung
+
+CICD
+AWS Cost Management
+AWS Deployment
+AWS EC2 Management
+nginx
+Git
+
+
+
+
+
+
+
+
+
+
+
 Cronjob
 
 * * * * * command
@@ -58,6 +77,9 @@ jenkins:
     - "VIRTUAL_PORT=8080"
   volumes:
     - "/your/home:/var/jenkins_home"
+    
+    
+    
     
     
 
