@@ -1,6 +1,7 @@
 language: node_js
 node_js:
- - "node"
+ - "11.6.0"
+cache:npm
 before_install:
   - pip install --user codecov
 after_success:
@@ -11,4 +12,4 @@ deploy:
   github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
   keep_history: true
   on:
-    branch: deployment
+    branch: master
