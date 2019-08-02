@@ -85,6 +85,10 @@ jenkins:
     
     
     
+    https://computingforgeeks.com/running-jenkins-server-in-docker-container-systemd/
+    docker pull jenkins/jenkins:lts
+    
+    
 
    
    
