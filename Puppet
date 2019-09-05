@@ -1,0 +1,9 @@
+Puppet is Pull CM tools (ansible is push)
+Puppet agent
+
+
+puppet agent -t
+
+
+puppet cert list
+puppet cert sign puppetagent
