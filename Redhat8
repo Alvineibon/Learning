@@ -1,0 +1,56 @@
+Overview
+
+RHEL 8 is based on Fedora 28 and uses upstream Linux kernel 4.18. This release provides a stable, secure and good foundation for hybrid cloud deployments to support customer’s workloads.
+Architectures
+
+Red Hat Enterprise Linux 8 provides support for following architectures.
+
+    AMD and Intel 64-bit architectures
+    The 64-bit ARM architecture
+    IBM Power Systems, Little Endian
+    IBM Z
+
+RHEL 8 New Features
+
+    The Cockpit is now available by default
+    RHEL 8 comes with a new version of the YUM version which is based on DNF. This new version is compatible with YUM v3 (RHEL 7)
+    RPM v4.14 is distributed in RHEL 8. RPM now validates the whole package contents before starting the installation
+    RHEL 8 content is other file systems through the two main repositories: BaseOS and Application Stream (AppStream)
+    RHEL 8 support up to 4PB of physical memory
+    Wayland is the default display server instead of the Xorg server in RHEL 8
+    XFS now supports shared copy-on-write data extents
+    nftables replaces iptables as the default network filtering framework
+    Python 3.6 is the default Python version in RHEL 8
+    PHP 7.2 comes with RHEL 8
+    Nginx 1.14 is available in core repository in RHEL 8
+
+
+Cockpit
+
+Cockpit – a web-based interface for a system admin to perform admin tasks is now available by default RHEL repositories.
+
+The cockpit is now compatible with mobile browsers and makes it easier to manage systems from a mobile device.
+
+The Cockpits front page now includes the warning for missing updates and expired Red Hat subscription.
+
+
+Kernel
+
+While RHEL 7 support maximum of 64TB of physical memory, RHEL 8 support up to 4PB of physical memory.
+
+The sosreport can now report any loaded eBPF (extended Berkeley Packet Filtering) programs and maps in RHEL 8
+
+
+
+Networking
+IPtables
+
+nftables replaces iptables as the default network filtering framework, and it uses tables for storing input, output and forward chains, as like iptables.
+
+You can also convert your existing iptables or ip6tables rules into the suitable ones for nftables.
+FirewallD
+
+nftables becomes the default backend for the firewalld daemon.
+Security
+
+OpenSSH package has been upgraded to 7.8p1, and it removed the support for SSH version 1 protocol.
