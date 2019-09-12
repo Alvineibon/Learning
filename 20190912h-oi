@@ -1,0 +1,11 @@
+sshd key password login failed
+#run sshd in debug mode
+/usr/sbin sshd -d -p 2222
+
+Authentication refused: bad ownership or modes for directory /home/g7test
+chmod 755 ~g7test
+
+Allow other user access home directory
+
+setfacl -R -m user:esbuser:rwx ~g7prod
+setfacl -d -R -m user:esbuser:rwx ~g7prod
