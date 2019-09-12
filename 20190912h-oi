@@ -1,6 +1,6 @@
 sshd key password login failed
 #run sshd in debug mode
-/usr/sbin sshd -d -p 2222
+/usr/sbin/sshd -d -p 2222
 
 Authentication refused: bad ownership or modes for directory /home/g7test
 chmod 755 ~g7test
