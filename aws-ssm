@@ -1,0 +1,53 @@
+Setup Steps:
+install the Session Manager Plugin: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html
+
+Get the jumpbox key from Data Engineer Team, which should be jumpbox-key.pem
+
+Put the key into proper folder, and set the proper permission, by running the below in Terminal, with full path of the key file: chmod 400 ~/full/path/of/jumpbox-key.pem
+
+Set the config by editing ~/.ssh/config
+
+for all use case (update the key file path):
+
+
+host *.viudata
+    User ec2-user
+    IdentityFile ~/full/path/of/jumpbox-key.pem
+also add below lines, if you need to access Redshift:
+
+
+host redshift.viudata
+    RequestTTY no
+    RemoteCommand cat
+    LocalForward 15439 ott-data-lab.c1zp7ryjlwd5.us-east-1.redshift.amazonaws.com:5439
+    ProxyCommand sh -c "aws ssm start-session --region us-east-1 --target i-0f39232541a959105 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    
+host bi.redshift.viudata
+    RequestTTY no
+    RemoteCommand cat
+    LocalForward 16169 bi-ott-prod.c1zp7ryjlwd5.us-east-1.redshift.amazonaws.com:6169
+    ProxyCommand sh -c "aws ssm start-session --region us-east-1 --target i-0f39232541a959105 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+also add below lines, if you need to access Cron-Runner (update the key file path):
+
+
+host jumpbox.viudata
+    ProxyCommand sh -c "aws ssm start-session --region us-east-1 --target i-0f39232541a959105 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+
+host runner.viudata
+    Hostname 172.31.9.178
+    IdentityFile ~/full/path/of/runner-key.pem
+    ProxyJump jumpbox.viudata
+ 
+
+How to Access:
+
+
+Redshift (OTT):
+
+in Terminal run ssh redshift.viudata (type yes if asked), and keep the command running 
+
+
+
+open your SQL client to connect via localhost, with 15439 port
+
+
