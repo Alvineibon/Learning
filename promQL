@@ -1,0 +1,5 @@
+rate({app="viu-web",namespace="prod"}[1m])
+
+{app="viu-web",namespace="prod"}| json | line_format "{{.log}}" | json | line_format "{{.log}}"
+
+rate({app="viu-web",namespace="prod"}| json | line_format "{{.log}}" | json | line_format "{{.log}}" | req_id=31518 |__error__=""[1m])
