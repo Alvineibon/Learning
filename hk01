@@ -8,4 +8,8 @@ https://povilasv.me/kubernetes-node-local-dns-cache/
 helm repo add hk01-helm-chartmuseum https://helm-chartmuseum.wezeroplus.com --username helmer -p
 bin/hr -u template flux2/production/projects/hk01-web/helm-release.yaml
 
+Gracefully shut down pod
+
 https://www.linkinstars.com/post/12666403.html
+
+terminating > prestop hook > SIGTERM > graceful shutdown period > SIGKILL
