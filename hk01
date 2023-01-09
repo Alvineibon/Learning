@@ -13,3 +13,15 @@ Gracefully shut down pod
 https://www.linkinstars.com/post/12666403.html
 
 terminating > prestop hook > SIGTERM > graceful shutdown period > SIGKILL
+
+2023-01-09
+
+Topology Aware Hints
+
+https://tetrate.io/blog/minimizing-cross-zone-traffic-charges-with-istio/
+
+https://aws.amazon.com/blogs/containers/amazon-eks-cluster-multi-zone-auto-scaling-groups/
+
+Thanos
+
+https://www.readfog.com/a/1671509093948428288
