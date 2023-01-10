@@ -25,3 +25,48 @@ https://aws.amazon.com/blogs/containers/amazon-eks-cluster-multi-zone-auto-scali
 Thanos
 
 https://www.readfog.com/a/1671509093948428288
+
+2023-01-10
+
+elasticache CPU
+
+"max(last_1w):min:aws.elasticache.curr_items{*} by {cloud,replication_group,region} <= 0"
+"avg(last_5m):avg:aws.elasticache.engine_cpuutilization{ec-cloud} by {name} > 80"
+"sum(last_1m):avg:aws.elasticache.evictions{ec-cloud} by {name}.as_count() > 2000"
+"avg(last_5m):avg:aws.elasticache.curr_connections{ec-cloud} by {name,engine} > 500"
+
+
+ELB 5xx, latency
+rds cpu, free_storage, write_latency, write iops, 
+AWS 
+"avg(last_1h):avg:aws.advisor.service_limit.usage_ratio{*} by {limit_name,cloud,region} > 0.9"
+"avg(last_1d):avg:aws.billing.forecasted_spend{budget_name:monthly_overall_budget,cloud:dev} > 32000
+
+cloudwatchlog_logging_too_much
+"avg(last_1h):avg:aws.logs.incoming_bytes{*} by {cloud,loggroupname,region}.rollup(sum, 900) > 200000000"
+
+avg(last_15m):avg:aws.dx.connection_state{*} by {connectionid} < 1
+
+
+
+istio
+https://itnext.io/deploying-an-istio-gateway-with-tls-in-eks-using-the-aws-load-balancer-controller-448812e081e5
+
+
+https://godleon.github.io/blog/ChatOps/message-queue-concepts/
+
+"events(\"tags:\"cloud:prod\" source:amazon_elasticache \\\"Failover\\\"\").rollup(\"count\").by(\"replication_group\").last(\"1h\") > 0"
+
+istio + argorollout
+https://www.alibabacloud.com/help/en/alibaba-cloud-service-mesh/latest/asm-integrates-argo-rollouts-to-implement-canary-releases
+
+K8S / EKS v1.21: Does not reload projected service account token
+https://github.com/kubernetes/dashboard/issues/7219
+
+
+Kubernetes 1.24: gRPC container probes in beta
+https://kubernetes.io/blog/2022/05/13/grpc-probes-now-in-beta/
+
+
+nodejs(nextjs pm2)
+https://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/
