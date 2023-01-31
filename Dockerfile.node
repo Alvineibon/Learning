@@ -1,0 +1,33 @@
+ARG NODE_IMAGE_VERSION
+FROM node:${NODE_IMAGE_VERSION}
+ARG YARN_VERSION="1.22.17"
+ARG PM2_VERSION="4.5.6"
+# ARG PM2_VERSION="5.2.0"
+## fix CVE-2021-44906
+ARG NPM_VERSION="6.14.17"
+
+ENV PM2_INSTANCES=2 \
+    PM2_EXEC_MODE="cluster" \
+    PM2_SCRIPT="/srv/server.js" \
+    PM2_LOG_TYPE="json" \
+    PM2_LOG_DATE_FORMAT="YYYY-MM-DD HH:mm:ss" \
+    PM2_RESTART_DELAY="4000" \
+    PM2_MAX_CONSECUTIVE_RESTARTS="100" \
+    PM2_AUTORESTART="true" \
+    PM2_WAIT_READY="false" \
+    PM2_KILL_SIGNAL="SIGTERM" \
+    PM2_KILL_TIMEOUT=25000 \
+    PM2_APPLICATION_NAME="pm2app"
+
+RUN set -e; \
+    apt-get update; \
+    apt-get --yes dist-upgrade; \
+    apt-get --yes --no-install-recommends install gettext; \
+    apt-get clean; \
+    rm -rf /var/lib/apt/lists/*; \
+    npm install npm@${NPM_VERSION} --global; \
+    npm install pm2@${PM2_VERSION} --global; \
+    npm install yarn@${YARN_VERSION} --force --global; \
+    chmod +x /usr/local/bin/yarn;
+
+COPY ./base /base
