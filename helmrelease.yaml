@@ -1,0 +1,127 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: project-account-base-service
+  namespace: project-account-base-service
+spec:
+  chart:
+    spec:
+      chart: charts/projects/account-base-service
+      sourceRef:
+        kind: GitRepository
+        name: ops-helm-charts
+        namespace: flux-system
+  interval: 3m0s
+  releaseName: project-account-base-service
+  values:
+    _info:
+      context: stg-eks-cluster-apse1
+      stage: staging
+    secretFilesExternal:
+      env-key-secret:
+        folder: env/staging/default
+        file: "**"
+    configMapFiles:
+      fluentconf:
+        folder: fluentd
+        file: "fluentd.conf"
+    images:
+      default:
+        repository: 714417329994.dkr.ecr.ap-southeast-1.amazonaws.com/account-base-service # {"$imagepolicy": "project-account-base-service:default:name"}
+        tag: v161-build # {"$imagepolicy": "project-account-base-service:default:tag"}
+        policy: hk01vbuild-semver
+      fluentd:
+        repository: public.ecr.aws/bitnami/fluentd
+        tag: 1.13.0
+    # required
+    deployment:
+      hpa:
+        min: 3
+        version: v2
+        example: false
+        metrics: 
+        - type: External
+          external:
+           metric:
+            name: metric.name
+            selector:
+              matchLabels:
+                tag1: value122
+                tag2: value2
+            target:
+            type: AverageValue
+            averageValue: metric.value
+      volumes:
+        php-logs:
+          emptyDir: {}
+      containers:
+        nginx:
+          image: default
+          portName: http
+          port: 80
+          healthcheck:
+            http:
+              port: http
+              path: /api/health_check
+          resourcesGrade: small
+          env:
+            PARAMS: "nginx"
+        php:
+          image: default
+          port: 9000
+          portName: php-fpm
+          env:
+            PARAMS: "php"
+            PHP_RW_DIRECTORY: "/srv/storage"
+          volumeMounts: &volumeMounts
+            env-key-secret:
+              path: /srv
+              files:
+                - .env
+            php-logs:
+              path: /srv/storage/logs
+        fluentd:
+          image: fluentd
+          healthcheckOff: true
+          port: 8080
+          portName: fluent
+          volumeMounts: &fluentdVolumeMounts
+            fluentconf:
+              path: /opt/bitnami/fluentd/conf
+              files:
+                - fluentd.conf
+            php-logs:
+              path: /logs
+          resourcesGrade: micro
+    # default use deployment-nginx as backend
+    ingress:
+      hosts:
+        - host: account-base-service.hktester.com
+          paths:
+            - "/"
+    multiDeployment:
+      base:
+        volumes:
+          php-logs:
+            emptyDir: {}
+        disableHpa: true
+        replicaCount: 1
+        containers:
+          default:
+            image: default
+            healthcheckOff: true
+            port: 9000
+            portName: php-fpm
+            resourcesGrade: micro
+            volumeMounts: *volumeMounts
+      multi:
+        consume-queue:
+          containers:
+            default:
+              command: ["php", "artisan", "consume:queue"]
+    tags:
+      tier: 3
+      team: member
+    imageAutomation:
+      updatePath: flux2/staging/projects/account-base-service/helm-release.yaml
