@@ -70,3 +70,10 @@ https://kubernetes.io/blog/2022/05/13/grpc-probes-now-in-beta/
 
 nodejs(nextjs pm2)
 https://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/
+
+Vegta load test
+```
+brew update && brew install vegeta
+echo "GET http://www.hktester.com/" | vegeta attack -duration 20s -connections 10 -rate 200 | vegeta report
+```
+(https://github.com/tsenart/vegeta)
